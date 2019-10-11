@@ -11,17 +11,27 @@
 	}
 %}
 
-alpha 			[a-zA-Z]
+LETTER 			[a-zA-Z]
+DIGIT				[0-9]
+DIGIT_D			([1-9][0-9]*)
+DIGIT_OCTAL	([0][xX][0-7]*)
+DIGIT_HEX		([0][xX][0-9A-Fa-f]+)
+ZERO [0]
+
+VAR_TYPE		"int"|"string"
 name				{alpha}([0-9]*{alpha}*)
-eight				[0][a-zA-Z]*[0-8]
 whitespace 	[ \t\r\f\v]
 linefeed 		\n
-digit				[0-9]*
+
 
 %%
-{name} 				{ pos += strlen(yytext); show_lex("ID", yytext, yylineno, pos - strlen(yytext) + 1); return ID; }
-{eight} 				{ pos += strlen(yytext); show_lex("Error", yytext, yylineno, pos - strlen(yytext) + 1); return ERROR; }
-{digit} 			{ pos += strlen(yytext); show_lex("DIGIT", yytext, yylineno, pos - strlen(yytext) + 1); return ID; }
+{LETTER}({LETTER}|{DIGIT})* { pos += strlen(yytext); show_lex("ID", yytext, yylineno, pos - strlen(yytext) + 1); return ID; } 
+{DIGIT_D}			{ pos += strlen(yytext); show_lex("DIGIT_D", yytext, yylineno, pos - strlen(yytext) + 1); return DIGIT_D; }
+{DIGIT}+"."{DIGIT}+ { pos += strlen(yytext); show_lex("DIGIT_FLOAT", yytext, yylineno, pos - strlen(yytext) + 1); return NUMBER_F; }
+{DIGIT_OCTAL}			{ pos += strlen(yytext); show_lex("DIGIT_OCTAL", yytext, yylineno, pos - strlen(yytext) + 1); return DIGIT_OCTAL; }
+{DIGIT_HEX}			{ pos += strlen(yytext); show_lex("DIGIT_HEX", yytext, yylineno, pos - strlen(yytext) + 1); return DIGIT_HEX; }
+
+
 ":"						{ pos += strlen(yytext); show_lex("COLON", yytext, yylineno, pos - strlen(yytext) + 1); return COLON; }
 "=="					{ pos += strlen(yytext); show_lex("EQUAL", yytext, yylineno, pos - strlen(yytext) + 1); return EQUAL; }
 "{"						{ pos += strlen(yytext); show_lex("LBRACE", yytext, yylineno, pos - strlen(yytext) + 1); return LBRACE; }
@@ -41,9 +51,10 @@ digit				[0-9]*
 "EOF"	 				{ pos += strlen(yytext); show_lex("END", yytext, yylineno, pos - strlen(yytext) + 1); return END; }
 ">"	 					{ pos += strlen(yytext); show_lex("MORE", yytext, yylineno, pos - strlen(yytext) + 1); return MORE; }
 "<"	 					{ pos += strlen(yytext); show_lex("LESS", yytext, yylineno, pos - strlen(yytext) + 1); return LESS; }
+"package"			{ pos += strlen(yytext); show_lex("LESS", yytext, yylineno, pos - strlen(yytext) + 1); return PACKAGE; }
 "func"	 			{ pos += strlen(yytext); show_lex("FUNCTION", yytext, yylineno, pos - strlen(yytext) + 1); return FUNCTION; }
 "int"	 				{ pos += strlen(yytext); show_lex("INT", yytext, yylineno, pos - strlen(yytext) + 1); return INT; }
-"char"	 			{ pos += strlen(yytext); show_lex("STRING", yytext, yylineno, pos - strlen(yytext) + 1); return STRING; }
+"string"	 		{ pos += strlen(yytext); show_lex("STRING", yytext, yylineno, pos - strlen(yytext) + 1); return STRING; }
 "*"	 					{ pos += strlen(yytext); show_lex("MULTIPLY", yytext, yylineno, pos - strlen(yytext) + 1); return MULTIPLY; }
 "/"	 					{ pos += strlen(yytext); show_lex("DIVIDE", yytext, yylineno, pos - strlen(yytext) + 1); return DIVIDE; }
 "+"	 					{ pos += strlen(yytext); show_lex("PLUS", yytext, yylineno, pos - strlen(yytext) + 1); return PLUS; }
@@ -55,8 +66,10 @@ digit				[0-9]*
 
 {whitespace}	{ pos += 1; }
 {linefeed}		{ ++yylineno; pos = 0; }
+{ZERO} 				{ pos += strlen(yytext); show_lex("DIGIT_D", yytext, yylineno, pos - strlen(yytext) + 1); return DIGIT_D; }
 
-. return ERROR;
+{ZERO}+{LETTER}({LETTER}|{DIGIT})* { pos += strlen(yytext); show_lex("ERROR", yytext, yylineno, pos - strlen(yytext) + 1); return ERROR; }
+.  						{ pos += strlen(yytext); show_lex("ERROR", yytext, yylineno, pos - strlen(yytext) + 1);return ERROR; }
 %%
 #include<stdio.h>
 

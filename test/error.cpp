@@ -10,37 +10,7 @@ int main()
 {
 	int result;
 	vector<int> check;
-	vector<int> keys = {
-				ID, 
-				ID, 
-				ASSIGN, 
-				DIGIT_D, 
-				ID,
-				ID,
-				ASSIGN,
-				DIGIT_D, 
-				ID, 
-				ID, 
-				ASSIGN, 
-				ID,
-				PLUS, 
-				ID, 
-				ID, 
-				ASSIGN, 
-				ID, 
-				MULTIPLY, 
-				ID, 
-				ID, 
-				ASSIGN, 
-				ID, 
-				DIVIDE, 
-				ID, 
-				ID, 
-				ASSIGN, 
-				ID, 
-				MINUS, 
-				ID, 0}; 
-
+	vector<int> keys = {ERROR, ERROR, ERROR, 0};
 	do
 	{
 		result = yylex();
@@ -56,7 +26,7 @@ int main()
 		cout << "\033[0;32m Test[OK] \033[0m\n";
 	}
 	else {
-		cout << "\033[1;31m Test[FALSE] \033[0m\n";	
+		cout << "\033[1;31m Test[FALSE] \033[0m\n";
 	}
 
 	return 0;

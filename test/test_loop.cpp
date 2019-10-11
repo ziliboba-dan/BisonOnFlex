@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include "../generate/parser.tab.h"
 using namespace std;
 extern int yyparse();
 extern int yylex(void);
@@ -9,8 +10,43 @@ int main()
 {
 	int result;
 	vector<int> check;
-	vector<int> keys = {276, 276, 258, 276, 283, 276, 273, 276, 283, 276, 281, 281, 259, 
-			    276, 263, 276, 264, 276, 279, 276, 265, 260, 276, 276, 273, 276, 259, 276, 263, 276, 264, 276, 279, 276, 265, 260, 0};
+	vector<int> keys = { 
+			ID,
+			ID,
+			ASSIGN,
+			DIGIT_D,
+			SEMI,
+			ID,
+			LESS,
+			DIGIT_D,
+			SEMI,
+			ID,
+			PLUS,
+			PLUS,
+			LBRACE,
+			ID,
+			POINT,
+			ID,
+			LPAREN,
+			ID,
+			MULTIPLY,
+			ID,
+			RPAREN,
+			RBRACE,
+			ID,
+			ID,
+			LESS,
+			DIGIT_D,
+			LBRACE,
+			ID,
+			POINT,
+			ID,
+			LPAREN,
+			ID,
+			MULTIPLY,
+			ID,
+			RPAREN,
+			RBRACE, 0};
 	do
 	{
 		result = yylex();

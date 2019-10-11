@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.0.5.  */
+/* A Bison parser, made by GNU Bison 3.0.4.  */
 
 /* Bison implementation for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2015, 2018 Free Software Foundation, Inc.
+   Copyright (C) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@
 #define YYBISON 1
 
 /* Bison version.  */
-#define YYBISON_VERSION "3.0.5"
+#define YYBISON_VERSION "3.0.4"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -122,21 +122,28 @@ extern int yydebug;
     NOTEQUAL = 271,
     MORE = 272,
     LESS = 273,
-    END = 274,
-    FUNCTION = 275,
-    ID = 276,
-    INT = 277,
-    STRING = 278,
-    MULTIPLY = 279,
-    DIVIDE = 280,
-    PLUS = 281,
-    MINUS = 282,
-    SEMI = 283,
-    VAR = 284,
-    FOR = 285,
-    IF = 286,
-    LITTERAL = 287,
-    ERROR = 288
+    NUMBER_F = 274,
+    DIGIT_D = 275,
+    END = 276,
+    FUNCTION = 277,
+    ID = 278,
+    INT = 279,
+    STRING = 280,
+    MULTIPLY = 281,
+    DIVIDE = 282,
+    PLUS = 283,
+    MINUS = 284,
+    SEMI = 285,
+    VAR = 286,
+    FOR = 287,
+    IF = 288,
+    LITTERAL = 289,
+    ERROR = 290,
+    VAR_TYPE = 291,
+    PACKAGE = 292,
+    NUMBER = 293,
+    DIGIT_OCTAL = 294,
+    DIGIT_HEX = 295
   };
 #endif
 
@@ -156,7 +163,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 160 "parser.tab.c" /* yacc.c:358  */
+#line 167 "parser.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -401,7 +408,7 @@ union yyalloc
 #define YYLAST   0
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  34
+#define YYNTOKENS  41
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  2
 /* YYNRULES -- Number of rules.  */
@@ -412,7 +419,7 @@ union yyalloc
 /* YYTRANSLATE[YYX] -- Symbol number corresponding to YYX as returned
    by yylex, with out-of-bounds checking.  */
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   288
+#define YYMAXUTOK   295
 
 #define YYTRANSLATE(YYX)                                                \
   ((unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
@@ -449,7 +456,8 @@ static const yytype_uint8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
-      25,    26,    27,    28,    29,    30,    31,    32,    33
+      25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
+      35,    36,    37,    38,    39,    40
 };
 
 #if YYDEBUG
@@ -467,9 +475,10 @@ static const char *const yytname[] =
 {
   "$end", "error", "$undefined", "ASSIGN", "LBRACE", "RBRACE", "COLON",
   "COMMA", "POINT", "LPAREN", "RPAREN", "LBRACKET", "RBRACKET", "EQUAL",
-  "EQR", "EQL", "NOTEQUAL", "MORE", "LESS", "END", "FUNCTION", "ID", "INT",
-  "STRING", "MULTIPLY", "DIVIDE", "PLUS", "MINUS", "SEMI", "VAR", "FOR",
-  "IF", "LITTERAL", "ERROR", "$accept", "start", YY_NULLPTR
+  "EQR", "EQL", "NOTEQUAL", "MORE", "LESS", "NUMBER_F", "DIGIT_D", "END",
+  "FUNCTION", "ID", "INT", "STRING", "MULTIPLY", "DIVIDE", "PLUS", "MINUS",
+  "SEMI", "VAR", "FOR", "IF", "LITTERAL", "ERROR", "VAR_TYPE", "PACKAGE",
+  "NUMBER", "DIGIT_OCTAL", "DIGIT_HEX", "$accept", "start", YY_NULLPTR
 };
 #endif
 
@@ -481,7 +490,8 @@ static const yytype_uint16 yytoknum[] =
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
      265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
      275,   276,   277,   278,   279,   280,   281,   282,   283,   284,
-     285,   286,   287,   288
+     285,   286,   287,   288,   289,   290,   291,   292,   293,   294,
+     295
 };
 # endif
 
@@ -539,13 +549,13 @@ static const yytype_uint8 yycheck[] =
      symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,    35,     0
+       0,    42,     0
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,    34,    35
+       0,    41,    42
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
@@ -912,7 +922,6 @@ yysyntax_error (YYSIZE_T *yymsg_alloc, char **yymsg,
       case N:                               \
         yyformat = S;                       \
       break
-    default: /* Avoid compiler warnings. */
       YYCASE_(0, YY_("syntax error"));
       YYCASE_(1, YY_("syntax error, unexpected %s"));
       YYCASE_(2, YY_("syntax error, unexpected %s, expecting %s"));
@@ -1229,7 +1238,7 @@ yyreduce:
   switch (yyn)
     {
       
-#line 1233 "parser.tab.c" /* yacc.c:1648  */
+#line 1242 "parser.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1457,7 +1466,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 18 "grammar/parser.y" /* yacc.c:1907  */
+#line 18 "grammar/parser.y" /* yacc.c:1906  */
 
 void yyerror(char const *x)
 {

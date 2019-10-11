@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.0.5.  */
+/* A Bison parser, made by GNU Bison 3.0.4.  */
 
 /* Bison interface for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2015, 2018 Free Software Foundation, Inc.
+   Copyright (C) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -61,21 +61,28 @@ extern int yydebug;
     NOTEQUAL = 271,
     MORE = 272,
     LESS = 273,
-    END = 274,
-    FUNCTION = 275,
-    ID = 276,
-    INT = 277,
-    STRING = 278,
-    MULTIPLY = 279,
-    DIVIDE = 280,
-    PLUS = 281,
-    MINUS = 282,
-    SEMI = 283,
-    VAR = 284,
-    FOR = 285,
-    IF = 286,
-    LITTERAL = 287,
-    ERROR = 288
+    NUMBER_F = 274,
+    DIGIT_D = 275,
+    END = 276,
+    FUNCTION = 277,
+    ID = 278,
+    INT = 279,
+    STRING = 280,
+    MULTIPLY = 281,
+    DIVIDE = 282,
+    PLUS = 283,
+    MINUS = 284,
+    SEMI = 285,
+    VAR = 286,
+    FOR = 287,
+    IF = 288,
+    LITTERAL = 289,
+    ERROR = 290,
+    VAR_TYPE = 291,
+    PACKAGE = 292,
+    NUMBER = 293,
+    DIGIT_OCTAL = 294,
+    DIGIT_HEX = 295
   };
 #endif
 
