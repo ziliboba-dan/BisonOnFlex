@@ -13,12 +13,14 @@
 
 alpha 			[a-zA-Z]
 name				{alpha}([0-9]*{alpha}*)
+eight				[0][a-zA-Z]*[0-8]
 whitespace 	[ \t\r\f\v]
 linefeed 		\n
 digit				[0-9]*
 
 %%
 {name} 				{ pos += strlen(yytext); show_lex("ID", yytext, yylineno, pos - strlen(yytext) + 1); return ID; }
+{eight} 				{ pos += strlen(yytext); show_lex("Error", yytext, yylineno, pos - strlen(yytext) + 1); return ERROR; }
 {digit} 			{ pos += strlen(yytext); show_lex("DIGIT", yytext, yylineno, pos - strlen(yytext) + 1); return ID; }
 ":"						{ pos += strlen(yytext); show_lex("COLON", yytext, yylineno, pos - strlen(yytext) + 1); return COLON; }
 "=="					{ pos += strlen(yytext); show_lex("EQUAL", yytext, yylineno, pos - strlen(yytext) + 1); return EQUAL; }
@@ -53,6 +55,8 @@ digit				[0-9]*
 
 {whitespace}	{ pos += 1; }
 {linefeed}		{ ++yylineno; pos = 0; }
+
+. return ERROR;
 %%
 #include<stdio.h>
 
